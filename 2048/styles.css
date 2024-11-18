@@ -44,11 +44,11 @@ h1 {
 
 button {
 	font-size: large;
-    background-color: #2980b9;
+    background-color: #54ad9f;
     color: white;
     border: none;
     padding: 10px 20px; /* Default padding */
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     width: auto; /* Button adjusts based on its content by default */
@@ -146,8 +146,58 @@ button:hover {
     color: white;
 }
 
+/* Game Over Container */
+.game-over {
+    position: fixed; /* Fija el div a la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    display: flex;
+    flex-direction: column; /* Coloca el texto y el botón en columna */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 999; /* Asegura que esté encima de otros elementos */
+    display: none; /* Inicialmente oculto */
+}
+
+.game-over span {
+    color: white;
+    font-size: 3rem; /* Tamaño grande para el texto GAME OVER */
+    margin-bottom: 20px; /* Espacio entre el texto y el botón */
+}
+
+/* Botón */
+#restart-btn2 {
+    font-size: 1.5rem;
+    background-color: #54ad9f;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 25%; /* Tamaño fijo para el botón */
+}
+
+#restart-btn2:hover {
+    background-color: #3498db;
+}
+
 /* Responsive Styles */
 @media (max-width: 600px) {
+	.game-over span {
+        font-size: 2rem; /* Reducir tamaño del texto en pantallas pequeñas */
+    }
+
+    #restart-btn2 {
+        font-size: 1.2rem; /* Reducir tamaño del texto en el botón */
+        padding: 12px 24px; /* Ajustar el padding */
+        width: 100%; /* Hacer que el botón ocupe el 100% del ancho en pantallas pequeñas */
+    }
+
     .game-container {
         width: 90%;
     }
@@ -172,6 +222,12 @@ button:hover {
         width: auto; /* Make button full width on smaller screens */
         padding: 15px; /* Adjust padding for a bigger touch target */
         font-size: 1rem; /* Make text bigger on smaller screens */
+    }
+
+	#restart-btn2 {
+        font-size: 1.2rem; /* Reducir tamaño del texto en el botón */
+        padding: 15px 30px; /* Ajustar el padding */
+        width: 50%; /* Hacer que el botón ocupe el 100% del ancho en pantallas pequeñas */
     }
 }
 
@@ -201,5 +257,11 @@ button:hover {
         width: 75%; /* Ensure button stays full width on extra small screens */
         padding: 10px;
         font-size: 1rem;
+    }
+
+	#restart-btn2 {
+        font-size: 1.2rem; /* Reducir tamaño del texto en el botón */
+        padding: 10px 25px; /* Ajustar el padding */
+        width: 50%; /* Hacer que el botón ocupe el 100% del ancho en pantallas pequeñas */
     }
 }

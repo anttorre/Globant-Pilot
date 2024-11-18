@@ -8,10 +8,12 @@ let gameOver = false;
 document.addEventListener("DOMContentLoaded", () => {
     initializeGame();
     document.getElementById("restart-btn").addEventListener("click", restartGame);
-    window.addEventListener("keydown", handleKeyPress);
+    document.getElementById("restart-btn2").addEventListener("click", restartGame);
+	window.addEventListener("keydown", handleKeyPress);
 });
 
 function initializeGame() {
+	document.getElementById('gameOver').style.display = 'none';
     board = Array(gridSize).fill().map(() => Array(gridSize).fill(0)); // Reset board
     score = 0; // Reset score
     updateBoard();
@@ -21,7 +23,8 @@ function initializeGame() {
 
 function restartGame() {
 	gameOver = false;
-    initializeGame(); // Restart the game
+    document.getElementById('gameOver').style.display = 'none'; // Ocultar Game Over
+    initializeGame(); // Reiniciar el juego
 }
 
 function addRandomTile() {
@@ -91,9 +94,12 @@ function handleKeyPress(e) {
         addRandomTile();
         updateBoard();
     }
+
+	checkGameOver();
 }
 
 function moveUp() {
+	checkGameOver();
     canMove = false;
     let moved = false;
     for (let c = 0; c < gridSize; c++) {
@@ -120,6 +126,7 @@ function moveUp() {
 }
 
 function moveDown() {
+	checkGameOver();
     canMove = false;
     let moved = false;
     for (let c = 0; c < gridSize; c++) {
@@ -146,6 +153,7 @@ function moveDown() {
 }
 
 function moveLeft() {
+	checkGameOver();
     canMove = false;
     let moved = false;
     for (let r = 0; r < gridSize; r++) {
@@ -172,6 +180,7 @@ function moveLeft() {
 }
 
 function moveRight() {
+	checkGameOver();
     canMove = false;
     let moved = false;
     for (let r = 0; r < gridSize; r++) {
@@ -219,4 +228,33 @@ function merge(arr) {
 // Helper function to compare arrays (board states)
 function arraysEqual(a, b) {
     return JSON.stringify(a) === JSON.stringify(b);
+}
+
+function checkGameOver() {
+    // 1. Comprobar si aún hay celdas vacías
+    for (let r = 0; r < gridSize; r++) {
+        for (let c = 0; c < gridSize; c++) {
+            if (board[r][c] === 0) {
+                return false; // Si hay una celda vacía, el juego no está terminado
+            }
+        }
+    }
+
+    // 2. Comprobar si existen movimientos posibles
+    for (let r = 0; r < gridSize; r++) {
+        for (let c = 0; c < gridSize; c++) {
+            // Comprobar si hay celdas adyacentes con el mismo valor (posibles movimientos)
+            if (c + 1 < gridSize && board[r][c] === board[r][c + 1]) {
+                return false; // Movimiento posible a la derecha
+            }
+            if (r + 1 < gridSize && board[r][c] === board[r + 1][c]) {
+                return false; // Movimiento posible hacia abajo
+            }
+        }
+    }
+
+    // Si no hay celdas vacías y no existen movimientos posibles
+    gameOver = true;
+    document.getElementById('gameOver').style.display = 'flex'; // Mostrar el Game Over
+    return true;
 }
