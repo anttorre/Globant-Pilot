@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #faf8ef;
+}
+
+.game-container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #776e65;
+}
+
+.score-container {
+    margin-bottom: 20px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.grid-cell {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #cdc1b4;
+    font-size: 2rem;
+    color: #776e65;
+    border-radius: 5px;
+    transition: all 1s ease-in-out; /* Animación al mover las tiles */
+	position: relative;
+}
+
+.tile-2 { background-color: #eee4da; }
+.tile-4 { background-color: #ede0c8; }
+.tile-8 { background-color: #f2b179; }
+.tile-16 { background-color: #f59563; }
+.tile-32 { background-color: #f67c5f; }
+.tile-64 { background-color: #f65e3b; }
+.tile-128 { background-color: #edcf72; }
+.tile-256 { background-color: #edcc61; }
+.tile-512 { background-color: #edc850; }
+.tile-1024 { background-color: #edc53f; }
+.tile-2048 { background-color: #edc22e; }
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #8f7a66;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #776e65;
+}
+
+/* Animación de fusión */
+@keyframes tile-merge {
+    0% {
+        transform: scale(1);
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        transform: scale(1.2);
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+    100% {
+        transform: scale(1);
+        background-color: #cdc1b4;
+    }
+}
+
+/* Cuando las tiles se fusionan, se aplica la animación */
+.tile-merge {
+    animation: tile-merge 0.5s ease;
+}
