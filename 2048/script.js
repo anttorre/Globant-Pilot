@@ -1,6 +1,9 @@
 const gridSize = 4;
 let board = [];
 let score = 0;
+let canMove = true;
+let movedThisTurn = false; // Variable para saber si hubo movimiento
+let gameOver = false;
 
 document.addEventListener("DOMContentLoaded", () => {
     initializeGame();
@@ -17,6 +20,7 @@ function initializeGame() {
 }
 
 function restartGame() {
+	gameOver = false;
     initializeGame(); // Restart the game
 }
 
@@ -50,7 +54,7 @@ function updateBoard() {
             tile.style.gridColumnStart = c + 1; // Adjust to correct grid position
             if (cell !== 0) {
                 tile.classList.add(`tile-${cell}`);
-                tile.textContent = cell;
+                tile.innerHTML = "<span>"+ cell+ "</span>";
             }
             gridContainer.appendChild(tile); // Append tile to grid
         });
@@ -60,6 +64,13 @@ function updateBoard() {
 }
 
 function handleKeyPress(e) {
+    if (!canMove) return;
+
+    movedThisTurn = false; // Reset the movement flag
+
+    // Make a copy of the board to compare before and after the move
+    const boardBeforeMove = board.map(row => row.slice());
+
     switch (e.key) {
         case "ArrowUp":
             moveUp();
@@ -74,9 +85,17 @@ function handleKeyPress(e) {
             moveRight();
             break;
     }
+
+    // Only add a random tile if the board has changed
+    if (!arraysEqual(boardBeforeMove, board)) {
+        addRandomTile();
+        updateBoard();
+    }
 }
 
 function moveUp() {
+    canMove = false;
+    let moved = false;
     for (let c = 0; c < gridSize; c++) {
         let column = [];
         for (let r = 0; r < gridSize; r++) {
@@ -86,15 +105,23 @@ function moveUp() {
         }
         column = merge(column);
         for (let r = 0; r < gridSize; r++) {
+            if (board[r][c] !== column[r]) {
+                moved = true;
+            }
             board[r][c] = column[r] || 0;
         }
     }
-    addRandomTile();
-    updateBoard();
-    animateTiles();
+    if (moved) {
+        movedThisTurn = true;
+    }
+    setTimeout(() => {
+        canMove = true;
+    }, 200);  // Wait for animation to complete
 }
 
 function moveDown() {
+    canMove = false;
+    let moved = false;
     for (let c = 0; c < gridSize; c++) {
         let column = [];
         for (let r = gridSize - 1; r >= 0; r--) {
@@ -104,15 +131,23 @@ function moveDown() {
         }
         column = merge(column);
         for (let r = 0; r < gridSize; r++) {
+            if (board[gridSize - 1 - r][c] !== column[r]) {
+                moved = true;
+            }
             board[gridSize - 1 - r][c] = column[r] || 0;
         }
     }
-    addRandomTile();
-    updateBoard();
-    animateTiles();
+    if (moved) {
+        movedThisTurn = true;
+    }
+    setTimeout(() => {
+        canMove = true;
+    }, 200);
 }
 
 function moveLeft() {
+    canMove = false;
+    let moved = false;
     for (let r = 0; r < gridSize; r++) {
         let row = [];
         for (let c = 0; c < gridSize; c++) {
@@ -122,15 +157,23 @@ function moveLeft() {
         }
         row = merge(row);
         for (let c = 0; c < gridSize; c++) {
+            if (board[r][c] !== row[c]) {
+                moved = true;
+            }
             board[r][c] = row[c] || 0;
         }
     }
-    addRandomTile();
-    updateBoard();
-    animateTiles();
+    if (moved) {
+        movedThisTurn = true;
+    }
+    setTimeout(() => {
+        canMove = true;
+    }, 200);
 }
 
 function moveRight() {
+    canMove = false;
+    let moved = false;
     for (let r = 0; r < gridSize; r++) {
         let row = [];
         for (let c = gridSize - 1; c >= 0; c--) {
@@ -140,12 +183,18 @@ function moveRight() {
         }
         row = merge(row);
         for (let c = 0; c < gridSize; c++) {
+            if (board[r][gridSize - 1 - c] !== row[c]) {
+                moved = true;
+            }
             board[r][gridSize - 1 - c] = row[c] || 0;
         }
     }
-    addRandomTile();
-    updateBoard();
-    animateTiles();
+    if (moved) {
+        movedThisTurn = true;
+    }
+    setTimeout(() => {
+        canMove = true;
+    }, 200);
 }
 
 function merge(arr) {
@@ -167,13 +216,7 @@ function merge(arr) {
     return newArray;
 }
 
-function animateTiles() {
-    const tiles = document.querySelectorAll(".grid-cell");
-    tiles.forEach(tile => {
-        // Apply animation class for tile movement
-        tile.classList.add("tile-merge");
-        setTimeout(() => {
-            tile.classList.remove("tile-merge");
-        }, 200); // Duration of the merge animation
-    });
+// Helper function to compare arrays (board states)
+function arraysEqual(a, b) {
+    return JSON.stringify(a) === JSON.stringify(b);
 }
