@@ -26,5 +26,5 @@ app.get('/api/search', async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:8080`);
+    console.log(`Server running at http://localhost:3000`);
 });
