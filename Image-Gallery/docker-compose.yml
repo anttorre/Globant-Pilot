@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:3000"
+    volumes:
+      - ./src:/app/src
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge

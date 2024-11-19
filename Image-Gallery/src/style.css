@@ -1,0 +1,173 @@
+/* Estilo general de la página */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #f4f4f9, #e0e0e0);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+}
+
+/* Contenedor principal */
+h1 {
+    font-size: 2.5rem;
+    color: #4a90e2;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estilo del input de búsqueda */
+input[type="text"] {
+    padding: 15px;
+    font-size: 1.2rem;
+    width: 80%;
+    max-width: 600px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Efecto al hacer foco en el input */
+input[type="text"]:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
+}
+
+/* Estilo del botón de búsqueda */
+button {
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 25%;
+    max-width: 200px;
+}
+
+/* Efecto al pasar el ratón sobre el botón */
+button:hover {
+    background-color: #357ab7;
+    transform: translateY(-2px);
+}
+
+/* Contenedor de imágenes */
+#images-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 30px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Estilo de cada imagen */
+#images-container img {
+    width: 300px;  /* Tamaño fijo */
+    height: 200px; /* Tamaño fijo */
+    object-fit: cover;  /* Asegura que la imagen cubra el área sin deformarse */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el ratón sobre las imágenes */
+#images-container img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Media Queries para dispositivos más pequeños */
+
+/* Para pantallas de tabletas y móviles grandes (hasta 768px) */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    input[type="text"] {
+        width: 90%;
+        font-size: 1rem;
+    }
+
+    button {
+        width: 35%;
+        font-size: 1rem;
+    }
+
+    #images-container {
+        gap: 15px;
+        padding: 0 10px;
+    }
+
+    #images-container img {
+        width: 250px;
+        height: 170px; /* Asegura el tamaño fijo en pantallas más pequeñas */
+    }
+}
+
+/* Para pantallas de móviles (hasta 480px) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    input[type="text"] {
+        width: 95%;
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    button {
+        width: 50%;
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    #images-container {
+        gap: 10px;
+    }
+
+    #images-container img {
+        width: 100%;
+        max-width: 220px;
+        height: 150px; /* Tamaño fijo en dispositivos muy pequeños */
+    }
+}
+
+/* Para pantallas grandes y de escritorio (mayores a 1024px) */
+@media (min-width: 1024px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    input[type="text"] {
+        width: 50%;
+    }
+
+    button {
+        width: 20%;
+    }
+
+    #images-container {
+        gap: 30px;
+        justify-content: space-around;
+    }
+
+    #images-container img {
+        width: 350px;
+        height: 250px;  /* Tamaño fijo en pantallas grandes */
+    }
+}
