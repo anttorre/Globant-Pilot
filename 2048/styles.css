@@ -142,12 +142,12 @@ button:hover {
 }
 
 .tile-2048 {
-    background-color: #2c3e50;
+    background-color: #415d78;
     color: white;
 }
 
 /* Game Over Container */
-.game-over {
+.game-over, .youWon{
     position: fixed; /* Fija el div a la pantalla */
     top: 0;
     left: 0;
@@ -163,7 +163,7 @@ button:hover {
     display: none; /* Inicialmente oculto */
 }
 
-.game-over span {
+.game-over span, .youWon span {
     color: white;
     font-size: 3rem; /* Tamaño grande para el texto GAME OVER */
     margin-bottom: 20px; /* Espacio entre el texto y el botón */
@@ -183,6 +183,22 @@ button:hover {
 }
 
 #restart-btn2:hover {
+    background-color: #3498db;
+}
+
+#restart-btn3 {
+    font-size: 1.5rem;
+    background-color: #54ad9f;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 25%; /* Tamaño fijo para el botón */
+}
+
+#restart-btn3:hover {
     background-color: #3498db;
 }
 

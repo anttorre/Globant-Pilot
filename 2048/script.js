@@ -4,16 +4,19 @@ let score = 0;
 let canMove = true;
 let movedThisTurn = false; // Variable para saber si hubo movimiento
 let gameOver = false;
+let youWon = false;
 
 document.addEventListener("DOMContentLoaded", () => {
     initializeGame();
     document.getElementById("restart-btn").addEventListener("click", restartGame);
     document.getElementById("restart-btn2").addEventListener("click", restartGame);
+	document.getElementById("restart-btn3").addEventListener("click", restartGame);
 	window.addEventListener("keydown", handleKeyPress);
 });
 
 function initializeGame() {
 	document.getElementById('gameOver').style.display = 'none';
+	document.getElementById('youWon').style.display = 'none';
     board = Array(gridSize).fill().map(() => Array(gridSize).fill(0)); // Reset board
     score = 0; // Reset score
     updateBoard();
@@ -23,7 +26,9 @@ function initializeGame() {
 
 function restartGame() {
 	gameOver = false;
-    document.getElementById('gameOver').style.display = 'none'; // Ocultar Game Over
+	youWon = false;
+    document.getElementById('gameOver').style.display = 'none';
+	document.getElementById('youWon').style.display = 'none'; // Ocultar Game Over
     initializeGame(); // Reiniciar el juego
 }
 
@@ -55,6 +60,11 @@ function updateBoard() {
             tile.classList.add("grid-cell");
             tile.style.gridRowStart = r + 1; // Adjust to correct grid position
             tile.style.gridColumnStart = c + 1; // Adjust to correct grid position
+			if (cell === 2048)
+			{
+				youWon = true;
+				return;
+			}
             if (cell !== 0) {
                 tile.classList.add(`tile-${cell}`);
                 tile.innerHTML = "<span>"+ cell+ "</span>";
@@ -62,6 +72,9 @@ function updateBoard() {
             gridContainer.appendChild(tile); // Append tile to grid
         });
     });
+	if (youWon)
+		document.getElementById('youWon').style.display = 'flex'; // Mostrar el Game Over
+
     // Update score
     document.getElementById("score").textContent = score;
 }
