@@ -99,7 +99,6 @@ function handleKeyPress(e) {
 }
 
 function moveUp() {
-	checkGameOver();
     canMove = false;
     let moved = false;
     for (let c = 0; c < gridSize; c++) {
@@ -126,7 +125,6 @@ function moveUp() {
 }
 
 function moveDown() {
-	checkGameOver();
     canMove = false;
     let moved = false;
     for (let c = 0; c < gridSize; c++) {
@@ -153,7 +151,6 @@ function moveDown() {
 }
 
 function moveLeft() {
-	checkGameOver();
     canMove = false;
     let moved = false;
     for (let r = 0; r < gridSize; r++) {
@@ -180,7 +177,6 @@ function moveLeft() {
 }
 
 function moveRight() {
-	checkGameOver();
     canMove = false;
     let moved = false;
     for (let r = 0; r < gridSize; r++) {
