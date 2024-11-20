@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h1>Bienvenido</h1>
+            <p class="subtitle">Inicia sesión con tu cuenta de Unsplash para continuar.</p>
+            <button id="loginButton" class="login-btn">Iniciar sesión con Unsplash</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginButton').addEventListener('click', () => {
+            window.location.href = '/auth/login';  // Redirige al endpoint /auth/login
+        });
+    </script>
+</body>
+</html>
