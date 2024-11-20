@@ -2,10 +2,6 @@
 	"name": "Image-Gallery",
 	"version": "1.0.0",
 	"main": "server.js",
-	"type": "module",
-	"dependencies": {
-	  "express": "^4.17.1",
-	  "node-fetch": "^3.2.10"
-	}
+	"type": "module"
 }
   
