@@ -36,7 +36,30 @@ document.getElementById('logoutButton').addEventListener('click', () => {
     window.location.href = '/';  // Redirige a login.html
 });
 
-// Evento de búsqueda de imágenes
+// Función para gestionar favoritos
+// Función para alternar favoritos
+function toggleFavorite(imageUrl) {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const index = favorites.indexOf(imageUrl);
+
+    if (index > -1) {
+        // Si ya está en favoritos, eliminarla
+        favorites.splice(index, 1);
+    } else {
+        // Si no está en favoritos, añadirla
+        favorites.push(imageUrl);
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+}
+
+// Función para verificar si una imagen es favorita
+function isFavorite(imageUrl) {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    return favorites.includes(imageUrl);
+}
+
+// Evento para buscar imágenes
 document.getElementById('searchButton').addEventListener('click', async () => {
     const query = document.getElementById('query').value;
     if (!query) {
@@ -44,26 +67,43 @@ document.getElementById('searchButton').addEventListener('click', async () => {
         return;
     }
 
-    // Realizar la solicitud a la API de búsqueda de imágenes con el token
     const response = await fetch(`/api/search?query=${query}`, {
         headers: {
-            Authorization: `Bearer ${token}`, // Usar el token para autenticación
+            Authorization: `Bearer ${token}`,
         },
     });
 
     const data = await response.json();
-
     const imagesContainer = document.getElementById('images-container');
-    imagesContainer.innerHTML = '';  // Limpiar las imágenes anteriores
+    imagesContainer.innerHTML = '';
 
     if (data.images && data.images.length > 0) {
         data.images.forEach(url => {
+            const imageWrapper = document.createElement('div');
+            imageWrapper.className = 'image-wrapper';
+
             const img = document.createElement('img');
             img.src = url;
             img.alt = query;
-            imagesContainer.appendChild(img);
+
+            const favoriteButton = document.createElement('button');
+            favoriteButton.textContent = isFavorite(url) ? '★' : '☆'; // Estrella llena o vacía
+            favoriteButton.className = 'favorite-button';
+            favoriteButton.addEventListener('click', () => {
+                toggleFavorite(url);
+                favoriteButton.textContent = isFavorite(url) ? '★' : '☆';
+            });
+
+            imageWrapper.appendChild(img);
+            imageWrapper.appendChild(favoriteButton);
+            imagesContainer.appendChild(imageWrapper);
         });
     } else {
         imagesContainer.innerHTML = '<p>No se encontraron imágenes.</p>';
     }
+});
+
+// Evento para redirigir a la página de favoritos
+document.getElementById('favoritesLink').addEventListener('click', () => {
+    window.location.href = 'favoritos.html';
 });

@@ -154,13 +154,14 @@ button {
 }
 
 #images-container img {
-    width: 100%;
-    max-width: 300px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+	width: 300px; /* Ancho fijo */
+    height: 250px; /* Alto fijo */
+    object-fit: cover; /* Mantener proporciones y rellenar el espacio */
+    border-radius: 10px; /* Opcional: bordes redondeados */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra ligera */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+	border: 1px solid #ddd;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #images-container img:hover {
@@ -235,6 +236,111 @@ button {
 .login-btn:active {
 	transform: translateY(0); /* Al presionar, el botón vuelve a su posición original */
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Sombra ligera */
+}
+
+/* Contenedor de favoritos */
+.favorites-container {
+    margin-top: 120px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.favorites-container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+#favorites-images-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+#favorites-images-container img {
+    width: 300px; /* Ancho fijo */
+    height: 250px; /* Alto fijo */
+    object-fit: cover; /* Mantener proporciones y rellenar el espacio */
+    border-radius: 10px; /* Opcional: bordes redondeados */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra ligera */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+	border: 1px solid #ddd;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#favorites-images-container img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.image-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.favorite-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+}
+
+.favorite-button:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #000;
+}
+
+
+.favorite-item {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.favorite-item img {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.delete-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-button:hover {
+    background-color: #ff1a1a;
 }
 
 /* Media Queries */
