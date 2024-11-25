@@ -40,7 +40,7 @@ function TripRecommendator() {
               {
                 parts: [
                   {
-                    text: `Recomienda lugares turísticos relacionados con ${query} y dame coordenadas geográficas (lat, lon). Devuelveme toda esta informacion como un json con los campos nombre, estado, descripcion, coordenadas (lat y lon).`,
+                    text: `Recomienda lugares turísticos relacionados con ${query.toLowerCase()} y dame coordenadas geográficas (lat, lon). Devuelveme toda esta informacion como un json con los campos nombre, estado, descripcion, coordenadas (lat y lon).`,
                   },
                 ],
               },
